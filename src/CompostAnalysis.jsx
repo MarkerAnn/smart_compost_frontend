@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import PropTypes from 'prop-types'
-import { MoonLoader } from 'react-spinners' // Make sure to import the spinner you want to use
+import { MoonLoader } from 'react-spinners'
 
+/**
+ * ********************** CompostAnalysis - Component to analyze compost data and provide suggestions **********************
+ * @param {Object} latestData - The latest compost sensor data.
+ * @returns {JSX.Element} - The CompostAnalysis component.
+ */
 const CompostAnalysis = ({ latestData }) => {
   const [suggestions, setSuggestions] = useState('')
   const [loading, setLoading] = useState(false)
@@ -21,6 +26,9 @@ const CompostAnalysis = ({ latestData }) => {
     console.log('Suggestions updated:', suggestions)
   }, [suggestions])
 
+  /**
+   * Analyze the latest compost data by calling the OpenAI API.
+   */
   const analyzeData = async () => {
     setLoading(true)
     const url = 'https://api.openai.com/v1/chat/completions'
@@ -64,7 +72,6 @@ const CompostAnalysis = ({ latestData }) => {
   }
 
   console.log('Latest data:', latestData)
-  console.log('API key:', import.meta.env.VITE_CHATGPT_API_KEY)
 
   return (
     <div className='p-3 bg-violet rounded-lg shadow-lg'>

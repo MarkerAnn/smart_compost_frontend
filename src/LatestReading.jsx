@@ -17,7 +17,12 @@ const units = {
   temperature_scd: '°C',
 }
 
-// Hjälpfunktion för att bestämma gränsvärdesmeddelanden
+/**
+ * A function to return a threshold message based on the sensor label and value
+ * @param {string} label - The label of the sensor data.
+ * @param {number} value - The value of the sensor data.
+ * @returns {string} - The threshold message based on the label and value.
+ */
 const getThresholdMessage = (label, value) => {
   switch (label) {
     case 'co2':
@@ -56,6 +61,14 @@ const getThresholdMessage = (label, value) => {
   }
 }
 
+/**
+ * ********************** LatestReading - Component to display the latest compost sensor reading **********************
+ * @param {Object} props - The properties for the LatestReading component.
+ * @param {string} props.label - The label for the data point.
+ * @param {string|number} props.value - The value for the data point.
+ * @param {string|number} props.timestamp - The timestamp for the data point.
+ * @returns {JSX.Element} - The LatestReading component.
+ */
 const LatestReading = ({ label, value, timestamp }) => {
   const displayLabel = descriptions[label] || label
   const displayUnit = units[label] ? ` ${units[label]}` : ''

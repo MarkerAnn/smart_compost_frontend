@@ -9,14 +9,19 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 
+/**
+ * Format the timestamp to a "dd/mm" format
+ * @param {string} timestamp - The timestamp in the format "dd/mm/yyyy, hh:mm:ss".
+ * @returns {string} - The formatted date string.
+ */
 const formatDate = (timestamp) => {
-  // Anta att timestamp är en sträng i formatet "dd/mm/yyyy, hh:mm:ss"
-  const parts = timestamp.split(', ') // Delar upp datum och tid
-  const dateParts = parts[0].split('/') // Delar upp datumdelen
-  const timeParts = parts[1].split(':') // Delar upp tidsdelen
+  // Assume the timestamp is a string in the format "dd/mm/yyyy, hh:mm:ss"
+  const parts = timestamp.split(', ') // Split date and time
+  const dateParts = parts[0].split('/') // Split date part
+  const timeParts = parts[1].split(':') // Split time part
 
-  // Skapar ett nytt datumobjekt från de uppdelade delarna
-  // Observera att månaden är nollbaserad i JavaScript (0 = januari, 11 = december)
+  // Create a new date object from the split parts
+  // Note that the month is zero-based in JavaScript (0 = January, 11 = December)
   const date = new Date(
     dateParts[2],
     dateParts[1] - 1,
@@ -26,16 +31,25 @@ const formatDate = (timestamp) => {
     timeParts[2]
   )
 
-  // Kontrollerar för NaN-värden efter felaktig konvertering
+  // Check if the date is valid
   if (isNaN(date.getTime())) {
     console.error('Invalid date:', timestamp)
     return 'Invalid date'
   }
 
-  // Returnerar datumet i formatet "dag/månad" (21/6)
+  // Return the date in the format "day/month" (e.g., 21/6)
   return `${date.getDate()}/${date.getMonth() + 1}`
 }
 
+/**
+ * ********************** SensorChart - Component to display sensor data in an area chart **********************
+ * @param {Object} props - The properties for the SensorChart component.
+ * @param {Array} props.data - The data to be displayed in the chart.
+ * @param {string} props.dataKey - The key for the data values to be plotted.
+ * @param {string} props.title - The title of the chart.
+ * @param {string} props.color - The color of the chart area.
+ * @returns {JSX.Element} - The SensorChart component.
+ */
 const SensorChart = ({ data, dataKey, title, color }) => {
   return (
     <div className='p-4 bg-gray-800 rounded-lg shadow-md'>
@@ -76,60 +90,3 @@ SensorChart.propTypes = {
 }
 
 export default SensorChart
-
-// import PropType from 'prop-types'
-// import {
-//   AreaChart,
-//   Area,
-//   XAxis,
-//   YAxis,
-//   CartesianGrid,
-//   Tooltip,
-//   ResponsiveContainer,
-// } from 'recharts'
-
-// const SensorChart = ({ data, dataKey, title, color }) => {
-//   return (
-//     <div className='p-4 bg-gray-800 rounded-lg shadow-md'>
-//       <h2 className='text-white text-lg mb-4'>{title}</h2>
-//       <ResponsiveContainer width='100%' height={200}>
-//         <AreaChart
-//           data={data}
-//           margin={{
-//             top: 10,
-//             right: 30,
-//             left: 0,
-//             bottom: 0,
-//           }}
-//         >
-//           <defs>
-//             <linearGradient id='colorGradient' x1='0' y1='0' x2='0' y2='1'>
-//               <stop offset='5%' stopColor={color} stopOpacity={0.8} />
-//               <stop offset='95%' stopColor={color} stopOpacity={0} />
-//             </linearGradient>
-//           </defs>
-//           <CartesianGrid strokeDasharray='3 3' stroke='#444' />
-//           <XAxis dataKey='timestamp' stroke='#ccc' />
-//           <YAxis stroke='#ccc' />
-//           <Tooltip />
-//           <Area
-//             type='monotone'
-//             dataKey={dataKey}
-//             stroke={color}
-//             fillOpacity={1}
-//             fill='url(#colorGradient)'
-//           />
-//         </AreaChart>
-//       </ResponsiveContainer>
-//     </div>
-//   )
-// }
-
-// export default SensorChart
-
-// SensorChart.propTypes = {
-//   data: PropType.array.isRequired,
-//   dataKey: PropType.string.isRequired,
-//   title: PropType.string.isRequired,
-//   color: PropType.string.isRequired,
-// }

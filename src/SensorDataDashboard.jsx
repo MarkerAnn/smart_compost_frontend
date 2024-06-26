@@ -5,6 +5,10 @@ import LatestReading from './LatestReading'
 import WeatherComponent from './WeatherComponent'
 import CompostAnalysis from './CompostAnalysis'
 
+/**
+ * ********************** SensorDataDashboard - Component to display sensor data and related analysis **********************
+ * @returns {JSX.Element} - The SensorDataDashboard component.
+ */
 const SensorDataDashboard = () => {
   const [allData, setAllData] = useState([])
   const [latestData, setLatestData] = useState({})

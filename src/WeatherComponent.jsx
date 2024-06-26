@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 
+/**
+ * ********************** WeatherComponent - Component to display current weather data **********************
+ * @returns {JSX.Element} - The WeatherComponent.
+ */
 const WeatherComponent = () => {
   const [weather, setWeather] = useState({
     description: '',
@@ -10,6 +14,9 @@ const WeatherComponent = () => {
   })
 
   useEffect(() => {
+    /**
+     * Fetches the current weather data from the OpenWeatherMap API.
+     */
     const fetchWeather = async () => {
       try {
         const response = await axios.get(
