@@ -71,6 +71,7 @@ const SensorDataDashboard = () => {
           />
         ))}
       </div>
+      <h1 className='text-2xl py-4'>Mätvärden den senaste veckan</h1>
       <div className='grid grid-cols-3 gap-4'>
         {sensorKeys.map((sensorKey) => (
           <div
